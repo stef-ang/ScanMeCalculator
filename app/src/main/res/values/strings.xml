@@ -15,5 +15,10 @@
   -->
 
 <resources>
-    <string name="app_name">ScanMeCalculator</string>
+    <string name="app_name">Scan Me!</string>
+
+    <string name="preview_screen_title">Image Preview</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="start_capture">Start Capture</string>
+    <string name="stop_capture">Stop Capture</string>
 </resources>

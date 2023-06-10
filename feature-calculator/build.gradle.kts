@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.gradle)
 }
 
 android {
@@ -57,7 +58,6 @@ android {
 dependencies {
     implementation(project(":core-data"))
     implementation(project(":core-ui"))
-    androidTestImplementation(project(":core-testing"))
 
     // Core Android dependencies
     implementation(libs.androidx.activity.compose)
@@ -68,10 +68,16 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // Compose
+    // Compose & UI
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
+
+    implementation(libs.mlkit)
+//    implementation(libs.mlkit.gms)
+
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
     // Instrumented tests

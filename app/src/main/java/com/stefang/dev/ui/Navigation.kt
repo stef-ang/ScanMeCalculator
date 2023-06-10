@@ -16,21 +16,79 @@
 
 package com.stefang.dev.ui
 
-import androidx.compose.foundation.layout.padding
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.stefang.dev.feature.calculator.CalculationHistoryScreen
+import androidx.navigation.navArgument
+import com.stefang.dev.R
+import com.stefang.dev.feature.calculator.screen.ImagePreviewScreen
+import com.stefang.dev.feature.calculator.screen.MainScreenRoute
+import java.net.URLDecoder
+import java.net.URLEncoder
 
 @Composable
-fun MainNavigation() {
-    val navController = rememberNavController()
+fun AppNavHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { CalculationHistoryScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
+    NavHost(
+        navController = navController,
+        startDestination = MainScreen.route,
+        modifier = modifier
+    ) {
+        composable(MainScreen.route) {
+            MainScreenRoute()
+        }
+
+        composable(
+            route = PreviewScreen.routeWithArgs,
+            arguments = PreviewScreen.arguments
+        ) {
+            val uri = it.arguments?.getString(PreviewScreen.uriArg)?.decode()
+            ImagePreviewScreen(photoUri = uri)
+        }
     }
 }
+
+fun Uri.encode(): String {
+    return URLEncoder.encode(this.toString(), "UTF-8")
+}
+
+fun String.decode(): Uri {
+    val decodedString = URLDecoder.decode(this, "UTF-8")
+    return Uri.parse(decodedString)
+}
+
+fun NavHostController.navigateSingleTopTo(route: String) {
+    this.navigate(route) {
+        launchSingleTop = true
+    }
+}
+
+interface AppDestination {
+    val route: String
+    val titleRes: Int
+}
+
+object MainScreen : AppDestination {
+    override val route: String = "main"
+    override val titleRes: Int = R.string.app_name
+}
+
+object PreviewScreen : AppDestination {
+    override val route: String = "preview"
+    override val titleRes: Int = R.string.preview_screen_title
+
+    const val uriArg = "uri"
+    val routeWithArgs = "$route/{$uriArg}"
+    val arguments = listOf(
+        navArgument(uriArg) { type = NavType.StringType }
+    )
+}
+
+val allScreens = listOf(MainScreen, PreviewScreen)

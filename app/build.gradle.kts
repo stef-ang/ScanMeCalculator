@@ -51,6 +51,30 @@ android {
         }
     }
 
+    flavorDimensions += listOf("theme", "mode")
+
+    productFlavors {
+        create("red") {
+            dimension = "theme"
+            buildConfigField("String", "SERVER_URL", "\"red-flavour\"")
+        }
+
+        create("green") {
+            dimension = "theme"
+            buildConfigField("String", "SERVER_URL", "\"green-flavour\"")
+        }
+
+        create("filesystem") {
+            dimension = "mode"
+            buildConfigField("String", "MODE", "\"FS-flavour\"")
+        }
+
+        create("camera") {
+            dimension = "mode"
+            buildConfigField("String", "MODE", "\"camera-flavour\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -63,6 +87,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        buildConfig = true
     }
 
     composeOptions {
@@ -79,11 +104,16 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":feature-calculator"))
+    implementation(project(":image-source-api"))
 
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    implementation(libs.android.material)
+    implementation(libs.androidx.app.compat)
+    implementation(libs.androidx.constraint.layout)
 
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
@@ -104,6 +134,7 @@ dependencies {
 
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.leakcanary)
 
     // temporary here
     implementation(libs.androidx.camera.core)
