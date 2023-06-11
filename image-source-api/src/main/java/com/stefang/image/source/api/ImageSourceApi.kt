@@ -1,11 +1,16 @@
 package com.stefang.image.source.api
 
-import android.content.Context
-import android.content.Intent
+import android.net.Uri
+import androidx.activity.ComponentActivity
 
 interface ImageSourceApi {
 
-    fun getAccessImageIntent(packageContext: Context): Intent
+    fun initLauncher(
+        componentActivity: ComponentActivity,
+        onResult: (Uri) -> Unit
+    )
+
+    fun runLauncher()
 
     companion object {
         const val EXTRA_PHOTO_URI = "extra_photo_uri"
