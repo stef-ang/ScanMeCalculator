@@ -19,6 +19,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.stefang.dev.BuildConfig
+import com.stefang.dev.core.ui.Theme
 import com.stefang.image.source.api.ImageSourceApi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,8 +38,10 @@ class MainActivity : ComponentActivity() {
         imageSourceApi.initLauncher(this) {
             viewModel.setUriImage(it)
         }
+        val theme = if (BuildConfig.THEME == "RED") Theme.red else Theme.green
         setContent {
             MainAppScreen(
+                theme = theme,
                 viewModel = viewModel,
                 onAccessImageSource = ::accessImageSource
             )

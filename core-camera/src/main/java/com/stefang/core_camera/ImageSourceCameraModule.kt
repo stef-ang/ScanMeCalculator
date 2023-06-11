@@ -1,8 +1,6 @@
-package com.stefang.image.source.api.di
+package com.stefang.core_camera
 
 import com.stefang.image.source.api.ImageSourceApi
-import com.stefang.image.source.api.camera.ImageSourceCameraApiImpl
-import com.stefang.image.source.api.filesystem.ImageSourceFileSystemApiImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface ImageSourceModule {
+interface ImageSourceCameraModule {
 
     @Singleton
     @Binds
@@ -19,9 +17,4 @@ interface ImageSourceModule {
         imageSource: ImageSourceCameraApiImpl
     ): ImageSourceApi
 
-//    @Singleton
-//    @Binds
-//    fun bindsImageSourceFileSystemApi(
-//        imageSource: ImageSourceFileSystemApiImpl
-//    ): ImageSourceApi
 }

@@ -5,12 +5,16 @@ plugins {
 }
 
 android {
-    namespace = "com.stefang.dev.core.data"
+    namespace = "com.stefang.core_file_system"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 21
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     compileOptions {
@@ -24,5 +28,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activity.compose)
+    api(project(":image-source-api"))
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

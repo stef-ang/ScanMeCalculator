@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -38,7 +38,8 @@ fun ImagePreviewScreen(
     context: Context = LocalContext.current,
     viewModel: ImagePreviewViewModel = hiltViewModel()
 ) {
-    val visionText by viewModel.visionTextState.collectAsStateWithLifecycle()
+    val inputText by viewModel.inputTextState.collectAsStateWithLifecycle()
+    val resultText by viewModel.resultTextState.collectAsStateWithLifecycle()
 
     lateinit var detector: TextRecognizer
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -74,6 +75,19 @@ fun ImagePreviewScreen(
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        inputText.takeIf { it.isNotEmpty() }?.let {
+            Text(
+                text = "Input: $it",
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+        resultText.takeIf { it.isNotEmpty() }?.let {
+            Text(
+                text = "Result: $it",
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+        Spacer(modifier = Modifier.size(12.dp))
         photoUri?.let { uri ->
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -82,12 +96,6 @@ fun ImagePreviewScreen(
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth
             )
-        }
-
-        Spacer(modifier = Modifier.size(12.dp))
-        Text(text = visionText)
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "OK")
         }
     }
 }

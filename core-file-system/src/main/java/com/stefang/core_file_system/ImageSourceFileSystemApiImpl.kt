@@ -1,4 +1,4 @@
-package com.stefang.image.source.api.filesystem
+package com.stefang.core_file_system
 
 import android.net.Uri
 import androidx.activity.ComponentActivity

@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -27,16 +28,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-
-        testInstrumentationRunner = "com.stefang.dev.core.testing.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures {
-        aidl = false
-        buildConfig = false
-        renderScript = false
-        shaders = false
     }
 
     compileOptions {
@@ -50,9 +42,13 @@ android {
 }
 
 dependencies {
+    // todo delete
     implementation(project(":core-database"))
 
     // Arch Components
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 

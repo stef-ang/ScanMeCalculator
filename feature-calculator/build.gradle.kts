@@ -28,17 +28,11 @@ android {
 
     defaultConfig {
         minSdk = 21
-
-        testInstrumentationRunner = "com.stefang.dev.core.testing.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
         compose = true
-        aidl = false
-        buildConfig = false
-        renderScript = false
-        shaders = false
     }
 
     composeOptions {
@@ -76,8 +70,6 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.mlkit)
-//    implementation(libs.mlkit.gms)
-
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
     // Instrumented tests

@@ -1,4 +1,4 @@
-package com.stefang.image.source.api.camera
+package com.stefang.core_camera
 
 import android.app.Activity
 import android.content.Intent

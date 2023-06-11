@@ -56,22 +56,22 @@ android {
     productFlavors {
         create("red") {
             dimension = "theme"
-            buildConfigField("String", "SERVER_URL", "\"red-flavour\"")
+            buildConfigField("String", "THEME", "\"RED\"")
+            manifestPlaceholders["appTheme"] = "@style/ScanMeThemeRed"
         }
 
         create("green") {
             dimension = "theme"
-            buildConfigField("String", "SERVER_URL", "\"green-flavour\"")
+            buildConfigField("String", "THEME", "\"GREEN\"")
+            manifestPlaceholders["appTheme"] = "@style/ScanMeThemeGreen"
         }
 
         create("filesystem") {
             dimension = "mode"
-            buildConfigField("String", "MODE", "\"FS-flavour\"")
         }
 
         create("camera") {
             dimension = "mode"
-            buildConfigField("String", "MODE", "\"camera-flavour\"")
         }
     }
 
@@ -104,16 +104,13 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":feature-calculator"))
-    implementation(project(":image-source-api"))
+    "cameraImplementation"(project(":core-camera"))
+    "filesystemImplementation"(project(":core-file-system"))
 
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-
-    implementation(libs.android.material)
-    implementation(libs.androidx.app.compat)
-    implementation(libs.androidx.constraint.layout)
 
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
@@ -135,11 +132,4 @@ dependencies {
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.leakcanary)
-
-    // temporary here
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.view)
-    implementation(libs.androidx.camera.extensions)
 }

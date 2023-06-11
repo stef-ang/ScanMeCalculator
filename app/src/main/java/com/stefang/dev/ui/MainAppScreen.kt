@@ -1,6 +1,7 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 package com.stefang.dev.ui
 
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,14 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.stefang.dev.R
-import com.stefang.dev.core.ui.MyApplicationTheme
+import com.stefang.dev.core.ui.ScanMeTheme
+import com.stefang.dev.core.ui.Theme
 
 @Composable
 fun MainAppScreen(
+    theme: Theme,
     viewModel: MainViewModel,
     onAccessImageSource: () -> Unit
 ) {
-    MyApplicationTheme {
+    ScanMeTheme(theme = theme) {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
@@ -38,10 +41,12 @@ fun MainAppScreen(
 
         LaunchedEffect(Unit) {
             viewModel.uriImageFlow.collect {
-                val uriString = it.encode()
-                navController.navigateSingleTopTo(
-                    "${PreviewScreen.route}/$uriString"
-                )
+                if (it != Uri.EMPTY) {
+                    val uriString = it.encode()
+                    navController.navigateSingleTopTo(
+                        "${PreviewScreen.route}/$uriString"
+                    )
+                }
             }
         }
 
@@ -68,7 +73,7 @@ fun MainAppScreen(
                 if (currentScreen == MainScreen) {
                     FloatingActionButton(onClick = { onAccessImageSource() }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_photo_camera_24),
+                            painter = painterResource(id = R.drawable.ic_access_image),
                             contentDescription = null
                         )
                     }
