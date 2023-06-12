@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.stefang.core_file_system"
+    namespace = "com.stefang.core.file.system"
     compileSdk = 33
 
     defaultConfig {

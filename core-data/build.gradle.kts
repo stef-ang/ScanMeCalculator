@@ -42,9 +42,6 @@ android {
 }
 
 dependencies {
-    // todo delete
-    implementation(project(":core-database"))
-
     // Arch Components
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

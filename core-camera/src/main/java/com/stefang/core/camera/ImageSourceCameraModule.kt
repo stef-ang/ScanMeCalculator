@@ -1,4 +1,4 @@
-package com.stefang.core_camera
+package com.stefang.core.camera
 
 import com.stefang.image.source.api.ImageSourceApi
 import dagger.Binds

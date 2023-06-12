@@ -19,25 +19,34 @@ package com.stefang.dev.core.ui
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 
-enum class Theme { red, green }
+enum class Theme { Red, Green }
 
 @Composable
 fun ScanMeTheme(
+    theme: Theme = Theme.Red,
     darkTheme: Boolean = isSystemInDarkTheme(),
-    theme: Theme = Theme.red,
     content: @Composable () -> Unit
 ) {
-    val themePair = if (theme == Theme.red) {
+    val themePair = if (theme == Theme.Red) {
         LightColorsRed to DarkColorsRed
     } else {
         LightColorsGreen to DarkColorsGreen
     }
     val colorScheme = if (darkTheme) themePair.second else themePair.first
 
+    val defaultTypo = MaterialTheme.typography
+    val scanMeTypography = defaultTypo.copy(
+        titleLarge = defaultTypo.titleLarge.copy(
+            color = colorScheme.primary,
+            fontWeight = FontWeight.SemiBold
+        )
+    )
+
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = scanMeTypography,
         content = content
     )
 }

@@ -32,7 +32,6 @@ rootProject.name = "Scan Me Calculator"
 
 include(":app")
 include(":core-data")
-include(":core-database")
 include(":core-ui")
 include(":feature-calculator")
 include(":image-source-api")

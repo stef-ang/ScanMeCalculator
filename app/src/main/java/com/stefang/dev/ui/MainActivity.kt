@@ -31,14 +31,14 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var imageSourceApi: ImageSourceApi
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainAppViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         imageSourceApi.initLauncher(this) {
             viewModel.setUriImage(it)
         }
-        val theme = if (BuildConfig.THEME == "RED") Theme.red else Theme.green
+        val theme = if (BuildConfig.THEME == "RED") Theme.Red else Theme.Green
         setContent {
             MainAppScreen(
                 theme = theme,

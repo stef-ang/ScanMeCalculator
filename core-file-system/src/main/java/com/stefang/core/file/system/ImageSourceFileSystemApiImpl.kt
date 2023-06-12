@@ -1,4 +1,4 @@
-package com.stefang.core_file_system
+package com.stefang.core.file.system
 
 import android.net.Uri
 import androidx.activity.ComponentActivity

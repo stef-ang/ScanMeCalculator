@@ -16,15 +16,12 @@
 
 package com.stefang.dev.core.data.di
 
+import com.stefang.dev.core.data.ArithmeticHistoryRepository
+import com.stefang.dev.core.data.ArithmeticHistoryRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import com.stefang.dev.core.data.CalculationHistoryRepository
-import com.stefang.dev.core.data.DefaultCalculationHistoryRepository
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
@@ -33,17 +30,7 @@ interface DataModule {
 
     @Singleton
     @Binds
-    fun bindsCalculationHistoryRepository(
-        calculationHistoryRepository: DefaultCalculationHistoryRepository
-    ): CalculationHistoryRepository
+    fun bindsArithmeticHistoryRepository(
+        repository: ArithmeticHistoryRepositoryImpl
+    ): ArithmeticHistoryRepository
 }
-
-class FakeCalculationHistoryRepository @Inject constructor() : CalculationHistoryRepository {
-    override val calculationHistorys: Flow<List<String>> = flowOf(fakeCalculationHistorys)
-
-    override suspend fun add(name: String) {
-        throw NotImplementedError()
-    }
-}
-
-val fakeCalculationHistorys = listOf("One", "Two", "Three")

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.stefang.core_camera"
+    namespace = "com.stefang.core.camera"
     compileSdk = 33
 
     defaultConfig {

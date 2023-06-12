@@ -1,4 +1,4 @@
-package com.stefang.core_camera
+package com.stefang.core.camera
 
 import android.Manifest
 import android.app.Activity
@@ -19,7 +19,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.stefang.core_camera.databinding.ActivityCameraBinding
+import com.stefang.core.camera.databinding.ActivityCameraBinding
 import com.stefang.image.source.api.ImageSourceApi.Companion.EXTRA_PHOTO_URI
 import java.text.SimpleDateFormat
 import java.util.Locale
