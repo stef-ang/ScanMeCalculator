@@ -2,6 +2,7 @@ package com.stefang.dev.core.data.mapper
 
 import android.net.Uri
 import com.stefang.dev.core.data.database.ArithmeticDbModel
+import com.stefang.dev.core.data.file.ArithmeticFile
 import com.stefang.dev.core.data.model.ArithmeticModel
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -17,6 +18,23 @@ fun ArithmeticDbModel.toModel() = ArithmeticModel(
 fun ArithmeticModel.toDbModel(createdAt: Long) = ArithmeticDbModel(
     operand1 = firstOperand,
     operand2 = secondOperand,
+    operator = operator,
+    result = result,
+    uri = uri.encode(),
+    createdAt = createdAt
+)
+
+fun ArithmeticFile.toModel() = ArithmeticModel(
+    firstOperand = firstOperand,
+    secondOperand = secondOperand,
+    operator = operator,
+    result = result,
+    uri = uri.decode()
+)
+
+fun ArithmeticModel.toFileModel(createdAt: Long) = ArithmeticFile(
+    firstOperand = firstOperand,
+    secondOperand = secondOperand,
     operator = operator,
     result = result,
     uri = uri.encode(),

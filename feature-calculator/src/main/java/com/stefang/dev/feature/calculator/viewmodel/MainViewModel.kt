@@ -1,5 +1,6 @@
 package com.stefang.dev.feature.calculator.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stefang.dev.core.data.ArithmeticHistoryRepository
@@ -15,10 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: ArithmeticHistoryRepository
+    repository: ArithmeticHistoryRepository
 ): ViewModel() {
 
     val allHistories: StateFlow<List<ArithmeticData>> = repository.histories.catch {
+        Log.d("error_scan_me", it.message ?: "error not found")
         emit(emptyList())
     }.map { list ->
         list.map { it.toUiModel() }

@@ -27,7 +27,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -50,6 +50,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.gson)
 
     // Local tests: jUnit, coroutines, Android runner
     testImplementation(libs.junit)
