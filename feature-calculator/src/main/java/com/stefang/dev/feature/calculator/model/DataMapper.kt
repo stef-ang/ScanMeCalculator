@@ -1,8 +1,8 @@
-package com.stefang.dev.feature.calculator.mapper
+package com.stefang.dev.feature.calculator.model
 
 import android.net.Uri
+import com.stefang.dev.core.data.datastore.ArithmeticDataStore
 import com.stefang.dev.core.data.model.ArithmeticModel
-import com.stefang.dev.feature.calculator.ArithmeticData
 
 fun ArithmeticData.toModel(uri: Uri) = ArithmeticModel(
     firstOperand = firstOperand,
@@ -18,3 +18,15 @@ fun ArithmeticModel.toUiModel() = ArithmeticData(
     operator = operator,
     result = result,
 )
+
+fun UsedStorage.toModel() = if (this == UsedStorage.File) {
+    ArithmeticDataStore.Storage.File
+} else {
+    ArithmeticDataStore.Storage.Database
+}
+
+fun ArithmeticDataStore.Storage.toUiModel() = if (this == ArithmeticDataStore.Storage.File) {
+    UsedStorage.File
+} else {
+    UsedStorage.Database
+}

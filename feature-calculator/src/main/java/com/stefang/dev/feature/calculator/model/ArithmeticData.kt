@@ -1,4 +1,4 @@
-package com.stefang.dev.feature.calculator
+package com.stefang.dev.feature.calculator.model
 
 data class ArithmeticData(
     val firstOperand: Double,

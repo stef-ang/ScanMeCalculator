@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.mlkit.vision.text.Text
 import com.stefang.dev.core.data.ArithmeticHistoryRepository
-import com.stefang.dev.feature.calculator.ArithmeticData
+import com.stefang.dev.feature.calculator.model.ArithmeticData
 import com.stefang.dev.feature.calculator.ArithmeticExtractorUseCase
-import com.stefang.dev.feature.calculator.mapper.toModel
+import com.stefang.dev.feature.calculator.model.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

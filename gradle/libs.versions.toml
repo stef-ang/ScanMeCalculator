@@ -8,6 +8,7 @@ androidxComposeBom = "2023.05.01"
 androidxComposeCompiler = "1.4.6"
 androidxConstraintLayout = "2.1.4"
 androidxCore = "1.10.1"
+androidxDataStore = "1.0.0"
 androidxHilt = "1.0.0"
 androidxLifecycle = "2.6.1"
 androidxNavigation = "2.5.3"
@@ -45,6 +46,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview"}
 androidx-constraint-layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidxConstraintLayout" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-datastore = { module="androidx.datastore:datastore-preferences", version.ref = "androidxDataStore" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHilt" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }

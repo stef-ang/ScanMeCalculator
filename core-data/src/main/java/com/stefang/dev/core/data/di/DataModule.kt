@@ -16,11 +16,16 @@
 
 package com.stefang.dev.core.data.di
 
+import android.content.Context
 import com.stefang.dev.core.data.ArithmeticHistoryRepository
 import com.stefang.dev.core.data.ArithmeticHistoryRepositoryImpl
+import com.stefang.dev.core.data.datastore.ArithmeticDataStore
+import com.stefang.dev.core.data.datastore.ArithmeticDataStoreImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -33,4 +38,12 @@ interface DataModule {
     fun bindsArithmeticHistoryRepository(
         repository: ArithmeticHistoryRepositoryImpl
     ): ArithmeticHistoryRepository
+
+    companion object {
+        @Singleton
+        @Provides
+        fun provideArithmeticDataStore(@ApplicationContext context: Context): ArithmeticDataStore {
+            return ArithmeticDataStoreImpl(context)
+        }
+    }
 }

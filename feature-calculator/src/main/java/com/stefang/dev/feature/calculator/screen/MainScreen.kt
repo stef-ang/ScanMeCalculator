@@ -31,7 +31,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stefang.dev.core.ui.ScanMeTheme
-import com.stefang.dev.feature.calculator.ArithmeticData
+import com.stefang.dev.feature.calculator.model.ArithmeticData
+import com.stefang.dev.feature.calculator.model.UsedStorage
 import com.stefang.dev.feature.calculator.viewmodel.MainViewModel
 
 @Composable
@@ -39,18 +40,21 @@ fun MainScreenRoute(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val histories by viewModel.allHistories.collectAsStateWithLifecycle()
+    val selectedStorage by viewModel.storageType.collectAsStateWithLifecycle()
 
-    MainScreen(histories)
+    MainScreen(histories, selectedStorage, viewModel::setStorage)
 }
 
 @Composable
 fun MainScreen(
-    histories: List<ArithmeticData>
+    histories: List<ArithmeticData>,
+    usedStorage: UsedStorage,
+    onUpdateStorage: (UsedStorage) -> Unit
 ) {
     Column(
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
-        StorageOptionsContainer()
+        StorageOptionsContainer(usedStorage, onUpdateStorage)
 
         Spacer(modifier = Modifier.size(16.dp))
         LazyColumn(
@@ -64,7 +68,10 @@ fun MainScreen(
 }
 
 @Composable
-private fun StorageOptionsContainer() {
+private fun StorageOptionsContainer(
+    usedStorage: UsedStorage,
+    onUpdateStorage: (UsedStorage) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -80,7 +87,7 @@ private fun StorageOptionsContainer() {
             fontSize = 12.sp
         )
 
-        var storageType by remember { mutableStateOf("db") }
+//        var storageType by remember { mutableStateOf(usedStorage) }
         Row(
             Modifier
                 .fillMaxWidth()
@@ -90,16 +97,16 @@ private fun StorageOptionsContainer() {
                 Modifier
                     .weight(1f)
                     .selectable(
-                        selected = storageType == "db",
-                        onClick = { storageType = "db" },
+                        selected = usedStorage == UsedStorage.Database,
+                        onClick = { onUpdateStorage(UsedStorage.Database) },
                         role = Role.RadioButton
                     )
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = storageType == "db",
-                    onClick = { storageType = "db" }
+                    selected = usedStorage == UsedStorage.Database,
+                    onClick = { onUpdateStorage(UsedStorage.Database) }
                 )
                 Text(text = "Database")
             }
@@ -107,16 +114,16 @@ private fun StorageOptionsContainer() {
                 Modifier
                     .weight(1f)
                     .selectable(
-                        selected = storageType == "file",
-                        onClick = { storageType = "file" },
+                        selected = usedStorage == UsedStorage.File,
+                        onClick = { onUpdateStorage(UsedStorage.File) },
                         role = Role.RadioButton
                     )
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = storageType == "file",
-                    onClick = { storageType = "file" }
+                    selected = usedStorage == UsedStorage.File,
+                    onClick = { onUpdateStorage(UsedStorage.File) }
                 )
                 Text(text = "File")
             }
@@ -129,9 +136,8 @@ private fun StorageOptionsContainer() {
 private fun Preview() {
     ScanMeTheme {
         Scaffold {
-            val x = it
             MainScreen(
-                listOf(
+                histories = listOf(
                     ArithmeticData(
                         firstOperand = 10.0,
                         secondOperand = 5.0,
@@ -156,7 +162,9 @@ private fun Preview() {
                         operator = '/',
                         result = 2.0,
                     )
-                )
+                ),
+                usedStorage = UsedStorage.File,
+                onUpdateStorage = {}
             )
         }
     }

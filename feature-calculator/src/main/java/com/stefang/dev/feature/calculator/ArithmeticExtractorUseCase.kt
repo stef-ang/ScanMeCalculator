@@ -1,5 +1,6 @@
 package com.stefang.dev.feature.calculator
 
+import com.stefang.dev.feature.calculator.model.ArithmeticData
 import javax.inject.Inject
 
 class ArithmeticExtractorUseCase @Inject constructor() {

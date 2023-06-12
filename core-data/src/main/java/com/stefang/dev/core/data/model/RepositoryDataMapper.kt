@@ -1,9 +1,8 @@
-package com.stefang.dev.core.data.mapper
+package com.stefang.dev.core.data.model
 
 import android.net.Uri
 import com.stefang.dev.core.data.database.ArithmeticDbModel
 import com.stefang.dev.core.data.file.ArithmeticFile
-import com.stefang.dev.core.data.model.ArithmeticModel
 import java.net.URLDecoder
 import java.net.URLEncoder
 

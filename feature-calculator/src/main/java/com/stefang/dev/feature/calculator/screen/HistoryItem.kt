@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stefang.dev.core.ui.ScanMeTheme
-import com.stefang.dev.feature.calculator.ArithmeticData
+import com.stefang.dev.feature.calculator.model.ArithmeticData
 
 @Composable
 fun HistoryItem(data: ArithmeticData) {
